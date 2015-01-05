@@ -24,13 +24,30 @@
 
 </script>
 
-		<input type="button" value="TEST" onclick="TestMe()"></input>
+		<input type="button" value="TEST 1" onclick="TestMe()"></input>
+		<input type="button" value="TEST 2" onclick="TestMe2()"></input>
 
 		<script type="text/javascript">
 		function TestMe() {
 			FB.api('/me', {fields: 'last_name'}, function(response) {
 					console.log(response);
 			});
+		}
+		</script>
+
+		<script type="text/javascript">
+
+		function TestMe2() {
+			FB.login(function(response) {
+			   if (response.authResponse) {
+			     console.log('Welcome!  Fetching your information.... ');
+			     FB.api('/me', function(response) {
+			       console.log('Good to see you, ' + response.name + '.');
+			     });
+			   } else {
+			     console.log('User cancelled login or did not fully authorize.');
+			   }
+			 });
 		}
 		</script>
 
